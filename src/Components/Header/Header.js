@@ -1,26 +1,37 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 const Header = () => {
+  const { userLogin } = useSelector((state) => state.nguoiDungSlice);
+  // const dataLocal = JSON.parse(localStorage.getItem('userLogin'));
+  // console.log(dataLocal);
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 text-white">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to={'/'} className="flex items-center">
             <img src="./image/logo.png" className="w-32" alt="" />
           </Link>
           <div className="flex items-center lg:order-2">
-            <Link
-              to={'/sign-in'}
-              className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-            >
-              Đăng nhập
-            </Link>
-            <Link
-              to={'/sign-up'}
-              className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 duration-500"
-            >
-              Đăng ký
-            </Link>
+            {userLogin ? (
+              <p>{userLogin.hoTen}</p>
+            ) : (
+              <>
+                <Link
+                  to={'/sign-in'}
+                  className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                >
+                  Đăng nhập
+                </Link>
+                <Link
+                  to={'/sign-up'}
+                  className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 duration-500"
+                >
+                  Đăng ký
+                </Link>
+              </>
+            )}
+
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -67,7 +78,7 @@ const Header = () => {
                   className={({ isActive }) =>
                     isActive
                       ? 'text-red-500 py-2 pr-4 pl-3'
-                      : 'text-black py-2 pr-4 pl-3'
+                      : 'text-black py-2 dark:text-white pr-4 pl-3'
                   }
                 >
                   Home
@@ -80,7 +91,7 @@ const Header = () => {
                   className={({ isActive }) =>
                     isActive
                       ? 'text-red-500 py-2 pr-4 pl-3'
-                      : 'text-black py-2 pr-4 pl-3'
+                      : 'text-black py-2 dark:text-white pr-4 pl-3'
                   }
                 >
                   Cụm rạp
@@ -93,7 +104,7 @@ const Header = () => {
                   className={({ isActive }) =>
                     isActive
                       ? 'text-red-500 py-2 pr-4 pl-3'
-                      : 'text-black py-2 pr-4 pl-3'
+                      : 'text-black py-2 dark:text-white pr-4 pl-3'
                   }
                 >
                   Tin tức
@@ -106,7 +117,7 @@ const Header = () => {
                   className={({ isActive }) =>
                     isActive
                       ? 'text-red-500 py-2 pr-4 pl-3'
-                      : 'text-black py-2 pr-4 pl-3'
+                      : 'text-black py-2 dark:text-white pr-4 pl-3'
                   }
                 >
                   Ứng dụng
