@@ -8,9 +8,9 @@ const initialState = {
 export const getAllMovieApi = createAsyncThunk(
   'phim/getAllMovieApi',
   async (_, thunkAPI) => {
-    console.log(thunkAPI);
+    // console.log(thunkAPI);
     const res = await quanLyPhimServ.getAllMovie();
-    console.log(res);
+    // console.log(res);
     // khi return về một giá trị thì giá trị này sẽ được gửi lên store
     return res.data.content;
   }
@@ -23,8 +23,8 @@ const phimSlice = createSlice({
   extraReducers: (builder) => {
     // builder.addCase(getAllMovieApi.pending);
     builder.addCase(getAllMovieApi.fulfilled, (state, action) => {
-      console.log(current(state));
-      console.log(action);
+      // console.log(current(state));
+      // console.log(action);
       // payload là kết quả trả về của return khi sử dụng thunk
       state.arrPhim = action.payload;
     });
