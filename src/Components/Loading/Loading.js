@@ -12,7 +12,7 @@ const Loading = () => {
   };
   return (
     <div
-      className="fixed h-screen w-screen flex items-center justify-center bg-slate-200"
+      className="fixed h-screen w-screen flex items-center justify-center bg-slate-200 bg-opacity-20"
       style={{ zIndex: '9999' }}
     >
       <Lottie options={defaultOptions} width={500} height={500} />

@@ -1,18 +1,27 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import { quanLyPhimServ } from '../../services/quanLyPhim';
+import { get_loading_started, get_loading_ended } from './loadingSlice';
 const initialState = {
   arrPhim: [],
 };
 // tạo ra một phương thức thông qua thunk để xử lí bất đồng bộ trước khi gửi dữ liệu lên store
 export const getAllMovieApi = createAsyncThunk(
   'phim/getAllMovieApi',
-  async (_, thunkAPI) => {
+  async (_, { dispatch }) => {
     // console.log(thunkAPI);
-
-    const res = await quanLyPhimServ.getAllMovie();
-    // console.log(res);
-    // khi return về một giá trị thì giá trị này sẽ được gửi lên store
-    return res.data.content;
+    try {
+      // mình gọi cho loading xuất hiện
+      dispatch(get_loading_started());
+      const res = await quanLyPhimServ.getAllMovie();
+      // khi gọi dữ liệu thành công, sẽ xử dụng get_loading_ended để tắt loading
+      dispatch(get_loading_ended());
+      // console.log(res);
+      // khi return về một giá trị thì giá trị này sẽ được gửi lên store
+      return res.data.content;
+    } catch (error) {
+      dispatch(get_loading_ended());
+      console.log(error);
+    }
   }
   // {
   //   condition: (_, { getState, extra }) => {
