@@ -36,7 +36,7 @@ export const TabCumRap = ({ maHeThongRap }) => {
         }}
         className="tab_cum_rap"
         items={cumRap.map((item, index) => {
-          console.log(item);
+          // console.log(item);
           return {
             label: (
               <div className="text-left w-full">

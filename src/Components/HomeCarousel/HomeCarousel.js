@@ -3,6 +3,11 @@ import { Carousel } from 'antd';
 import axios from 'axios';
 import { quanLyPhimServ } from '../../services/quanLyPhim';
 import './homeCarousel.scss';
+import { useDispatch } from 'react-redux';
+import {
+  get_loading_started,
+  get_loading_ended,
+} from './../../redux/slices/loadingSlice';
 const contentStyle = {
   margin: 0,
   height: '160px',
@@ -13,16 +18,20 @@ const contentStyle = {
 };
 
 const HomeCarousel = () => {
+  const dispatch = useDispatch();
   const [arrCarousel, setArrCarousel] = useState([]);
   useEffect(() => {
+    // dispatch(get_loading_started());
     quanLyPhimServ
       .getAllBanner()
       .then((res) => {
         // console.log(res);
         setArrCarousel(res.data.content);
+        // dispatch(get_loading_ended());
       })
       .catch((err) => {
         console.log(err);
+        // dispatch(get_loading_ended());
       });
   }, []);
 

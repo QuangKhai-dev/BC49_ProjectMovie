@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import { quanLyPhimServ } from '../../services/quanLyPhim';
-
 const initialState = {
   arrPhim: [],
 };
@@ -9,11 +8,18 @@ export const getAllMovieApi = createAsyncThunk(
   'phim/getAllMovieApi',
   async (_, thunkAPI) => {
     // console.log(thunkAPI);
+
     const res = await quanLyPhimServ.getAllMovie();
     // console.log(res);
     // khi return về một giá trị thì giá trị này sẽ được gửi lên store
     return res.data.content;
   }
+  // {
+  //   condition: (_, { getState, extra }) => {
+  //     const { loadingSlice } = getState();
+  //     loadingSlice.get_loading_started();
+  //   },
+  // }
 );
 
 const phimSlice = createSlice({
@@ -21,7 +27,7 @@ const phimSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(getAllMovieApi.pending);
+    // builder.addCase(getAllMovieApi.pending, (state, action) => {});
     builder.addCase(getAllMovieApi.fulfilled, (state, action) => {
       // console.log(current(state));
       // console.log(action);
